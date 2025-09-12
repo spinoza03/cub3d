@@ -11,27 +11,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub.h"
-#include <unistd.h>
+#include "include/cub.h"
+#include <stdio.h>
 
 int check_ext(char *str)
 {
 	char	*dot;
 
 	dot = ft_strrchr(str, '.');
-	if (dot == NULL || (ft_strcmp(dot - 1, ".cub") != 0 && *(dot - 1) == '.'))
+	if (dot == NULL || (ft_strcmp(dot, ".cub") != 0|| *(dot - 1) == '.'))
 		return (0);
 	else
 		return (1);
 }
-
+void init_data(t_data *game)
+{
+	game->north_texture = NULL;
+	game->west_texture = NULL;
+	game->south_texture = NULL;
+	game->east_texture = NULL;
+	game->floor_color = 0;
+	game->ceiling_color = 0;
+	game->map_height = 0;
+	game->map_width = 0;
+	game->map = NULL;
+}
 int main (int ac, char **av)
 {
-	t_game	*game;
+	t_game	game;
+
+	init_data(&game.data);
 	if (ac != 2)
-		perror("invalid args");
-	if (!check_ext(av[1]))
-		perror("Invalid file extension. Use .cub");
-	if (!pars_map(game, av[1]))
+		ft_pustr_fd("invalid args\n", 2);
+	else if (!check_ext(av[1]))
+		ft_pustr_fd("Invalid file extension. Use .cub\n", 2);
+	else if (!pars_map(&game, av[1]))
 		perror("invalid map");
 }

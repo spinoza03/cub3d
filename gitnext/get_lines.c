@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_lines.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allali <allali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:13:18 by ilallali          #+#    #+#             */
-/*   Updated: 2025/09/04 21:56:17 by allali           ###   ########.fr       */
+/*   Updated: 2025/09/12 16:57:24 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	l;
-
-	l = 0;
-	if (s == NULL)
-		return (0);
-	while (s[l])
-	{
-		l++;
-	}
-	return (l);
-}
 
 static char	*read_line(int fd, char *buffer)
 {

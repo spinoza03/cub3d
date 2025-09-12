@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allali <allali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:56 by allali            #+#    #+#             */
-/*   Updated: 2025/09/04 21:55:45 by allali           ###   ########.fr       */
+/*   Updated: 2025/09/12 15:34:33 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,61 @@
 # include <fcntl.h>
 # include <stdlib.h>
 // # include <mlx.h>
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 21474836475
-# endif
-typedef struct s_map
+#  define BUFFER_SIZE 1024
+
+typedef struct s_flag
 {
-	char	*grid;
-	s_map	*next;
-}	t_map;
+	int no;
+	int east;
+	int so;
+	int we;
+	int	configs;
+} t_flag;
+
+typedef struct s_data
+{
+    char    *north_texture;
+    char    *south_texture;
+    char    *west_texture;
+    char    *east_texture;
+    int     floor_color;
+    int     ceiling_color;
+    char    **map;
+    int     map_height;
+    int     map_width;
+	t_flag	flags;
+}   t_data;
 
 typedef struct s_game
 {
-	t_map	*map;
-} t_game;
+    void    *mlx_ptr;
+    void    *win_ptr;
+    t_data  data;
+}   t_game;
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 /* FUNCTIONS */
-int	ft_strcmp(char *s1, char *s2);
+char	*ft_strdup(const char *s);
+char	*ft_strtrim(const char *s1, const char *set);
+int		pars_map(t_game *game, char *file);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_strrchr(const char *str, int c);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t n);
-
+void	ft_pustr_fd(char *str, int fd);
 int		ft_strchr(const char *str, int c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
 char	*ft_substr(char const *s, size_t start, size_t len);
-char	*ft_strdup(const char *s);
 char	*get_next_line(int fd);
-
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new_node);
+t_list	*ft_lstlast(t_list *lst);
+int		ft_isdigit(int c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 #endif
