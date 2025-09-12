@@ -6,13 +6,11 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:50:22 by allali            #+#    #+#             */
-/*   Updated: 2025/09/12 14:34:09 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/12 17:17:43 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int	pars_north(char *line, char **north)
 {
@@ -32,7 +30,6 @@ int	pars_north(char *line, char **north)
 		*north = ft_strdup(trimed);
 	close(fd);
 	free(trimed);
-	free(*north);
 	return (1);
 }
 
@@ -54,7 +51,6 @@ int	pars_south(char *line, char **south)
 		*south = ft_strdup(trimed);
 	close(fd);
 	free(trimed);
-	free(*south);
 	return (1);
 }
 int	pars_east(char *line, char **east)
@@ -75,7 +71,6 @@ int	pars_east(char *line, char **east)
 		*east = ft_strdup(trimed);
 	close(fd);
 	free(trimed);
-	free(*east);
 	return (1);
 }
 
@@ -97,7 +92,6 @@ int	pars_west(char *line, char **west)
 		*west = ft_strdup(trimed);
 	close(fd);
 	free(trimed);
-	free(*west);
 	return (1);
 }
 
@@ -135,7 +129,10 @@ int read_file(t_game *game, char *file)
 		while (*ptr == ' ' || *ptr == '\t')
 			ptr++;
 		if (*line == '\n' || *line == '\0')
+		{
+			free(line);
 			continue;
+		}
 		if (!pars_conf(ptr, &game->data))
 		{
     		free(line);
@@ -143,7 +140,6 @@ int read_file(t_game *game, char *file)
 		}
 		free(line);
 	}
-	free(line);
 	return (1);
 }
 int	pars_map(t_game *game, char *file)
