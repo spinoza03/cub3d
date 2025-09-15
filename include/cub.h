@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:56 by allali            #+#    #+#             */
-/*   Updated: 2025/09/12 15:34:33 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/15 16:48:38 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+#include <limits.h>
 // # include <mlx.h>
 #  define BUFFER_SIZE 1024
 
@@ -26,7 +27,8 @@ typedef struct s_flag
 	int east;
 	int so;
 	int we;
-	int	configs;
+	int	floor;
+	int cealing;
 } t_flag;
 
 typedef struct s_data
@@ -56,6 +58,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 /* FUNCTIONS */
+int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s);
 char	*ft_strtrim(const char *s1, const char *set);
 int		pars_map(t_game *game, char *file);
@@ -75,4 +78,5 @@ t_list	*ft_lstlast(t_list *lst);
 int		ft_isdigit(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+char	**ft_split(const char *s, char c);
 #endif

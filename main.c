@@ -59,6 +59,8 @@ int main (int ac, char **av)
 	else if (!check_ext(av[1]))
 		ft_pustr_fd("Invalid file extension. Use .cub\n", 2);
 	else if (!pars_map(&game, av[1]))
-		perror("invalid map");
+		ft_pustr_fd("Invalid file\n", 2);
+	// printf("color : %d\n", game.data.floor_color);
+	// printf("color2 : %d\n", game.data.ceiling_color);
 	free_data(&game.data);
 }
