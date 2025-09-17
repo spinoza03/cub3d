@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:56 by allali            #+#    #+#             */
-/*   Updated: 2025/09/15 16:48:38 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/17 18:52:01 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-/* FUNCTIONS */
+
+void	ft_lstclear(t_list **lst, void (*del)(void *));
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s);
 char	*ft_strtrim(const char *s1, const char *set);
-int		pars_map(t_game *game, char *file);
+int		start_parsing(t_game *game, char *file);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strrchr(const char *str, int c);
 size_t	ft_strlen(const char *s);
@@ -79,4 +80,5 @@ int		ft_isdigit(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	**ft_split(const char *s, char c);
+int		ft_lstsize(t_list *lst);
 #endif

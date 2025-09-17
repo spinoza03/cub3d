@@ -6,12 +6,25 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:50:22 by allali            #+#    #+#             */
-/*   Updated: 2025/09/15 18:35:43 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/17 19:38:01 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
-#include <stdio.h>
+#include <stdlib.h>
+
+void    ft_free_split(char **arr)
+{
+    int i;
+
+    i = 0;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
+}
 
 int	pars_north(char *line, char **north, t_data *data)
 {
@@ -151,7 +164,11 @@ int	pars_floor(char *line, int *f, t_data *data)
 
 	splited = ft_split(line, ',');
 	if(data->flags.floor == 1 || !check_count(splited, f))
+	{
+		ft_free_split(splited);
 		return 0;
+	}
+	ft_free_split(splited); 
 	data->flags.floor = 1;
 	return 1;
 }
@@ -159,40 +176,112 @@ int	pars_floor(char *line, int *f, t_data *data)
 int	pars_ceiling(char *line, int *f, t_data *data)
 {
 	char	**splited;
+	int		i;
 
+	i = 0;
 	splited = ft_split(line, ',');
 	if(data->flags.cealing == 1 || !check_count(splited, f))
+	{
+		ft_free_split(splited);
 		return 0;
+	}
+	ft_free_split(splited); 
 	data->flags.cealing = 1;
 	return 1;
 }
-
-int	pars_conf(char *line, t_data *data)
+int pars_map(char *line, t_list **head)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		return(pars_north(line + 3, &data->north_texture, data));
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		return(pars_south(line + 3, &data->south_texture, data));
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		return(pars_east(line + 3, &data->east_texture, data));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		return(pars_west(line + 3, &data->west_texture, data));
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		return (pars_floor(line + 2, &data->floor_color, data));
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (pars_ceiling(line + 2, &data->ceiling_color, data));
+    char    *duped;
+    t_list  *new_node;
+
+    duped = ft_strdup(line);
+    if (!duped)
+        return (0);
+    new_node = ft_lstnew(duped);
+    if (!new_node)
+    {
+        free(duped);
+        return (0);
+    }
+    ft_lstadd_back(head, new_node);
+    return (1);
+}
+int pars_texture(char *line, char **texture_ptr, int *flag)
+{
+	int		fd;
+	char	*trimed;
+
+	fd = 0;
+	if(*flag == 1)
+		return (0);
+	trimed = ft_strtrim(line, " \n");
+	fd = open(trimed, O_RDONLY);
+	if (fd == -1)
+	{
+		free(trimed);
+		return 0;
+	}
 	else
-		return (1);
+		*texture_ptr = ft_strdup(trimed);
+	*flag = 1;
+	close(fd);
+	free(trimed);
+	return (1);
 }
 
-int read_file(t_game *game, char *file)
+int pars_color(char *line, int *color_ptr, int *flag)
+{
+	char	**splited;
+	int		i;
+
+	i = 0;
+	splited = ft_split(line, ',');
+	if(*flag == 1 || !check_count(splited, color_ptr))
+	{
+		ft_free_split(splited);
+		return 0;
+	}
+	ft_free_split(splited); 
+	*flag = 1;
+	return 1;
+}
+int	pars_conf(char *line, t_data *data, t_list **head)
+{
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		return(pars_texture(line + 3, &data->north_texture, &data->flags.no));
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		return(pars_texture(line + 3, &data->south_texture, &data->flags.so));
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		return(pars_texture(line + 3, &data->east_texture, &data->flags.east));
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		return(pars_texture(line + 3, &data->west_texture, &data->flags.we));
+	else if (ft_strncmp(line, "F ", 2) == 0)
+		return (pars_color(line + 2, &data->floor_color, &data->flags.floor));
+	else if (ft_strncmp(line, "C ", 2) == 0)
+		return (pars_color(line + 2, &data->ceiling_color, &data->flags.cealing));
+	else if (ft_strncmp(line, "0", 1) == 0 || ft_strncmp(line, "1", 1) == 0)
+		return (pars_map(line, head));
+	else if ((data->flags.cealing + data->flags.floor + data->flags.no + 
+          data->flags.we + data->flags.so + data->flags.east) == 6 &&
+         (ft_strncmp(line, "0", 1) == 0 ||
+		 	ft_strncmp(line, "1", 1) == 0))
+    	return (pars_map(line, head));
+	else
+	{
+		if(line[0] == '\n')
+			return (1);
+		return (0);
+	}
+}
+
+int read_file(t_game *game, char *file, t_list **head)
 {
 	char	*line;
 	int		fd;
 	char	*ptr;
 
 	fd = open(file , O_RDONLY);
-	while (1) //?
+	while (1)
 	{
 		line = get_next_line(fd);
 		if(!line)
@@ -205,19 +294,45 @@ int read_file(t_game *game, char *file)
 			free(line);
 			continue;
 		}
-		if (!pars_conf(ptr, &game->data))
-		{
-    		free(line);
-    		return (0);
-		}
+		if (!pars_conf(ptr, &game->data, head))
+    		return (free(line), 0);
 		free(line);
 	}
 	return (1);
 }
-int	pars_map(t_game *game, char *file)
+void	populate_arr(t_list *head, t_game *game)
 {
-	if (!read_file(game, file))
+	int		i;
+
+	i = 0;
+	while (head != NULL)
+	{
+		game->data.map[i] = ft_strdup(head->content);
+		head = head->next;
+	}
+	game->data.map[game->data.map_height] = NULL;
+}
+int	start_parsing(t_game *game, char *file)
+{
+	t_list				*head;
+	unsigned int		longest;
+	t_list				*current;
+
+	head = NULL;
+	current = head;
+	longest = 0;
+	if (!read_file(game, file, &head))
 		return (0);
-	else
-		return 1;
+	game->data.map_height = ft_lstsize(head);
+	while(current != NULL)
+	{
+		if(longest < ft_strlen(current->content))
+			longest = ft_strlen(current-> content);
+		current = current->next;
+	}
+	game->data.map_width = longest;
+	game->data.map = malloc(sizeof(char *) * (game->data.map_height + 1));
+	populate_arr(head, game);
+	ft_lstclear(&head, free);
+	return 1;
 }

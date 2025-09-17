@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:20:45 by ilallali          #+#    #+#             */
-/*   Updated: 2025/09/13 21:42:00 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/17 18:51:48 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,40 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (sign * result);
+}
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	(*del)(lst->content);
+	free(lst);
+}
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*node;
+
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		node = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = node;
+	}
+}
+
+int	ft_lstsize(t_list *lst)
+{
+	int		count;
+	t_list	*node;
+
+	node = lst;
+	count = 0;
+	while (node != NULL)
+	{
+		count++;
+		node = node->next;
+	}
+	return (count);
 }
