@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 NAME = cub3d
 
 SRC = main.c utils/functions.c utils/functions2.c utils/functions3.c gitnext/get_utils.c gitnext/get_lines.c parsing/pars_map.c \
-	utils/functions1.c utils/ft_strtrim.c
+	utils/functions1.c utils/functions4.c utils/ft_strtrim.c
 
 OBJ = ${SRC:.c=.o}
 HEADER = include/cub.h

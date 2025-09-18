@@ -49,6 +49,46 @@ void	free_data(t_data *data)
         free(data->west_texture);
     // add free for map
 }
+
+int	is_valid_char(char *str)
+{
+	int		i;
+	char	*valid_map_chars;
+
+	valid_map_chars = "01NSEW ";
+	i = 0;
+	while (str[i])
+	{
+		if(!ft_strchr1(valid_map_chars, str[i]))
+		{
+			printf("[%c]", str[i]);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	check_chars(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while(data->map[i])
+	{
+		if(!is_valid_char(data->map[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	pars_map_validation(t_data *data)
+{
+	if(!check_chars(data))
+		return (0);
+	return 1;
+}
 int main (int ac, char **av)
 {
 	t_game	game;
@@ -60,7 +100,10 @@ int main (int ac, char **av)
 		ft_pustr_fd("Invalid file extension. Use .cub\n", 2);
 	else if (!start_parsing(&game, av[1]))
 		ft_pustr_fd("Invalid file\n", 2);
+	else if (!pars_map_validation(&game.data))
+		ft_pustr_fd("Invalid map please fix it", 2);
 	// printf("color : %d\n", game.data.floor_color);
 	// printf("color2 : %d\n", game.data.ceiling_color);
-	free_data(&game.data);
+	// free_data(&game.data);
+	free_game_data(&game.data);
 }

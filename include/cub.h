@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:56 by allali            #+#    #+#             */
-/*   Updated: 2025/09/17 18:52:01 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/18 15:17:05 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void    free_game_data(t_data *data);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s);
@@ -76,6 +77,7 @@ char	*get_next_line(int fd);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new_node);
 t_list	*ft_lstlast(t_list *lst);
+char	*ft_strchr1(const char *str, int c);
 int		ft_isdigit(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

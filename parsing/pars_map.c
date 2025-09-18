@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:50:22 by allali            #+#    #+#             */
-/*   Updated: 2025/09/17 19:38:01 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/18 15:54:44 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,11 @@ int pars_map(char *line, t_list **head)
 {
     char    *duped;
     t_list  *new_node;
+	int		len;
 
+    len = ft_strlen(line);
+    if (len > 0 && line[len - 1] == '\n')
+        line[len - 1] = '\0';
     duped = ft_strdup(line);
     if (!duped)
         return (0);
@@ -261,11 +265,6 @@ int	pars_conf(char *line, t_data *data, t_list **head)
 		return (pars_color(line + 2, &data->ceiling_color, &data->flags.cealing));
 	else if (ft_strncmp(line, "0", 1) == 0 || ft_strncmp(line, "1", 1) == 0)
 		return (pars_map(line, head));
-	else if ((data->flags.cealing + data->flags.floor + data->flags.no + 
-          data->flags.we + data->flags.so + data->flags.east) == 6 &&
-         (ft_strncmp(line, "0", 1) == 0 ||
-		 	ft_strncmp(line, "1", 1) == 0))
-    	return (pars_map(line, head));
 	else
 	{
 		if(line[0] == '\n')
@@ -309,9 +308,64 @@ void	populate_arr(t_list *head, t_game *game)
 	{
 		game->data.map[i] = ft_strdup(head->content);
 		head = head->next;
+		i++;
 	}
 	game->data.map[game->data.map_height] = NULL;
 }
+void    debug_print_data(t_data *data)
+{
+    int i;
+
+    printf("\n--- 📝 PARSED DATA ---\n");
+    printf("North Texture:  [%s]\n", data->north_texture);
+    printf("South Texture:  [%s]\n", data->south_texture);
+    printf("East Texture:   [%s]\n", data->east_texture);
+    printf("West Texture:   [%s]\n", data->west_texture);
+    printf("Floor Color:    %#08x\n", data->floor_color);
+    printf("Ceiling Color:  %#08x\n", data->ceiling_color);
+    printf("Map Height:     %d\n", data->map_height);
+    printf("Map Width:      %d\n", data->map_width);
+    printf("--- 🗺️ MAP GRID ---\n");
+    if (!data->map)
+    {
+        printf("Map not loaded.\n");
+        return ;
+    }
+    i = 0;
+    while (data->map[i])
+    {
+        printf("%s\n", data->map[i]);
+        i++;
+    }
+    printf("-----------------------\n\n");
+}
+int	check_sum(t_game *game, t_list **head)
+{
+	int flag_sum;
+	flag_sum = game->data.flags.no + game->data.flags.so + 
+               game->data.flags.we + game->data.flags.east + 
+               game->data.flags.floor + game->data.flags.cealing;
+    if (flag_sum != 6)
+    {
+        ft_pustr_fd("Error: Missing one or more configurations.\n", 2);
+        ft_lstclear(head, free);
+        return (0);
+    }
+	return (1);
+}
+void    free_game_data(t_data *data)
+{
+    // Free the four texture paths
+    free(data->north_texture);
+    free(data->south_texture);
+    free(data->east_texture);
+    free(data->west_texture);
+
+    // Free the 2D map array using your helper function
+    if (data->map)
+        ft_free_split(data->map);
+}
+
 int	start_parsing(t_game *game, char *file)
 {
 	t_list				*head;
@@ -319,10 +373,12 @@ int	start_parsing(t_game *game, char *file)
 	t_list				*current;
 
 	head = NULL;
-	current = head;
 	longest = 0;
 	if (!read_file(game, file, &head))
 		return (0);
+	if(!check_sum(game, &head))
+		return (0);
+	current = head;
 	game->data.map_height = ft_lstsize(head);
 	while(current != NULL)
 	{
@@ -334,5 +390,6 @@ int	start_parsing(t_game *game, char *file)
 	game->data.map = malloc(sizeof(char *) * (game->data.map_height + 1));
 	populate_arr(head, game);
 	ft_lstclear(&head, free);
+	debug_print_data(&game->data);
 	return 1;
 }
