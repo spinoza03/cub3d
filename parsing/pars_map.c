@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:50:22 by allali            #+#    #+#             */
-/*   Updated: 2025/09/18 15:54:44 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/18 15:58:41 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,100 +26,6 @@ void    ft_free_split(char **arr)
     free(arr);
 }
 
-int	pars_north(char *line, char **north, t_data *data)
-{
-	int		fd;
-	char	*trimed;
-
-	fd = 0;
-	if(data->flags.no == 1)
-		return (0);
-	trimed = ft_strtrim(line, " \n");
-	fd = open(trimed, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_pustr_fd("error in north param\n", 2);
-		free(trimed);
-		return 0;
-	}
-	else
-		*north = ft_strdup(trimed);
-	data->flags.no = 1;
-	close(fd);
-	free(trimed);
-	return (1);
-}
-
-int	pars_south(char *line, char **south, t_data *data)
-{
-	int		fd;
-	char	*trimed;
-
-	fd = 0;
-	if(data->flags.so == 1)
-		return (0);
-	trimed = ft_strtrim(line, " \n");
-	fd = open(trimed, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_pustr_fd("error in south param\n", 2);
-		free(trimed);
-		return 0;
-	}
-	else
-		*south = ft_strdup(trimed);
-	data->flags.so = 1;
-	close(fd);
-	free(trimed);
-	return (1);
-}
-int	pars_east(char *line, char **east, t_data *data)
-{
-	int		fd;
-	char	*trimed;
-
-	fd = 0;
-	if(data->flags.east == 1)
-		return (0);
-	trimed = ft_strtrim(line, " \n");
-	fd = open(trimed, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_pustr_fd("error in east param\n", 2);
-		free(trimed);
-		return 0;
-	}
-	else
-		*east = ft_strdup(trimed);
-	data->flags.east = 1;
-	close(fd);
-	free(trimed);
-	return (1);
-}
-
-int	pars_west(char *line, char **west, t_data *data)
-{
-	int		fd;
-	char	*trimed;
-
-	fd = 0;
-	if(data->flags.we == 1)
-		return (0);
-	trimed = ft_strtrim(line, " \n");
-	fd = open(trimed, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_pustr_fd("error in west param\n", 2);
-		free(trimed);
-		return 0;
-	}
-	else
-		*west = ft_strdup(trimed);
-	data->flags.we = 1;
-	close(fd);
-	free(trimed);
-	return (1);
-}
 int	is_valid_integer(char *str)
 {
 	if (!str || !*str)
@@ -157,37 +63,6 @@ int	check_count(char **colors, int *final_color)
 		return (0);
 	*final_color = (c[0] << 16 | c[1] << 8 | c[2]);
 	return (1);
-}
-int	pars_floor(char *line, int *f, t_data *data)
-{
-	char	**splited;
-
-	splited = ft_split(line, ',');
-	if(data->flags.floor == 1 || !check_count(splited, f))
-	{
-		ft_free_split(splited);
-		return 0;
-	}
-	ft_free_split(splited); 
-	data->flags.floor = 1;
-	return 1;
-}
-
-int	pars_ceiling(char *line, int *f, t_data *data)
-{
-	char	**splited;
-	int		i;
-
-	i = 0;
-	splited = ft_split(line, ',');
-	if(data->flags.cealing == 1 || !check_count(splited, f))
-	{
-		ft_free_split(splited);
-		return 0;
-	}
-	ft_free_split(splited); 
-	data->flags.cealing = 1;
-	return 1;
 }
 int pars_map(char *line, t_list **head)
 {
