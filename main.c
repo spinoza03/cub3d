@@ -12,6 +12,7 @@
 /* ************************************************************************** */
 
 #include "include/cub.h"
+#include <stdio.h>
 
 
 int check_ext(char *str)
@@ -61,12 +62,41 @@ int	is_valid_char(char *str)
 	{
 		if(!ft_strchr1(valid_map_chars, str[i]))
 		{
-			printf("[%c]", str[i]);
+			printf(", here the problem-->[%c]", str[i]);
 			return (0);
 		}
 		i++;
 	}
 	return (1);
+}
+
+int	find_player(t_data *data)
+{
+	int	x;
+	int	y;
+	int	player_count;
+
+	y = 0;
+	player_count = 0;
+	while (data->map[y])
+	{
+		x = 0;
+		while (data->map[y][x])
+		{
+			if(ft_strchr1("NSEW", data->map[y][x]))
+			{
+				player_count++;
+				data->player_x = x;
+				data->player_y = y;
+				data->player_dir = data->map[y][x];
+			}
+			x++;
+		}
+		y++;
+	}
+	if (player_count != 1)
+    	return (0);
+	return (1); 
 }
 
 int	check_chars(t_data *data)
@@ -80,14 +110,43 @@ int	check_chars(t_data *data)
 			return (0);
 		i++;
 	}
+	if(!find_player(data))
+		return (0);
 	return (1);
 }
-
+int	check_neighbors(t_data *data, int y, int x)
+{
+	if (y - 1 < 0 || data->map[y - 1][x] == ' ')
+        return (0);
+    if (y + 1 >= data->map_height || data->map[y + 1][x] == ' ')
+        return (0);
+    if (x - 1 < 0 || data->map[y][x - 1] == ' ')
+        return (0);
+    if (x + 1 >= data->map_width || data->map[y][x + 1] == ' ')
+        return (0);
+    return (1);
+}
 int	pars_map_validation(t_data *data)
 {
+	int	x;
+	int	y;
+
+	y = 0;
 	if(!check_chars(data))
 		return (0);
-	return 1;
+	while (data->map[y])
+	{
+		x = 0;
+		while (data->map[y][x])
+		{
+			if(ft_strchr1("0NSEW", data->map[y][x]))
+				if(!check_neighbors(data, y, x))
+					return (0);
+			x++;
+		}
+		y++;
+	}
+	return (1);
 }
 int main (int ac, char **av)
 {

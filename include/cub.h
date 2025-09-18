@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:56 by allali            #+#    #+#             */
-/*   Updated: 2025/09/18 15:17:05 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/18 16:28:25 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef struct s_data
     int     floor_color;
     int     ceiling_color;
     char    **map;
+	int		player_x;
+	int		player_y;
+	char	player_dir;
     int     map_height;
     int     map_width;
 	t_flag	flags;
