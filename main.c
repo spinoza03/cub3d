@@ -116,15 +116,19 @@ int	check_chars(t_data *data)
 }
 int	check_neighbors(t_data *data, int y, int x)
 {
-	if (y - 1 < 0 || data->map[y - 1][x] == ' ')
-        return (0);
-    if (y + 1 >= data->map_height || data->map[y + 1][x] == ' ')
-        return (0);
-    if (x - 1 < 0 || data->map[y][x - 1] == ' ')
-        return (0);
-    if (x + 1 >= data->map_width || data->map[y][x + 1] == ' ')
-        return (0);
-    return (1);
+	if (y == 0)
+		return (0);
+	if (x >= (int)ft_strlen(data->map[y - 1]) || data->map[y - 1][x] == ' ')
+		return (0);
+	if (y == data->map_height - 1)
+		return (0);
+	if (x >= (int)ft_strlen(data->map[y + 1]) || data->map[y + 1][x] == ' ')
+		return (0);
+	if (x == 0 || data->map[y][x - 1] == ' ')
+		return (0);
+	if (x + 1 >= (int)ft_strlen(data->map[y]) || data->map[y][x + 1] == ' ')
+		return (0);
+	return (1);
 }
 int	pars_map_validation(t_data *data)
 {
