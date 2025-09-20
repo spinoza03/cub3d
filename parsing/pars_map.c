@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:50:22 by allali            #+#    #+#             */
-/*   Updated: 2025/09/18 16:02:54 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:34:59 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	check_count(char **colors, int *final_color)
 	int	c[3];
 
 	i = 0;
+	if (!colors[i] || colors[i][0] == '\0')
+		return (0);
 	while (colors[i])
 	{
 		if (!is_valid_integer(colors[i]))
@@ -114,6 +116,12 @@ int pars_color(char *line, int *color_ptr, int *flag)
 	int		i;
 
 	i = 0;
+	while (line[i])
+	{
+		if(line[i] == ',' && line[i + 1]  == ',')
+			return (0);
+		i++;
+	}
 	splited = ft_split(line, ',');
 	if(*flag == 1 || !check_count(splited, color_ptr))
 	{
@@ -235,8 +243,6 @@ void    free_game_data(t_data *data)
     free(data->south_texture);
     free(data->east_texture);
     free(data->west_texture);
-
-    // Free the 2D map array using your helper function
     if (data->map)
         ft_free_split(data->map);
 }
