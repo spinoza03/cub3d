@@ -40,15 +40,15 @@ void init_data(t_data *game)
 
 void	free_data(t_data *data)
 {
-    if (data->north_texture)
-        free(data->north_texture);
-    if (data->south_texture)
-        free(data->south_texture);
-    if (data->east_texture)
-        free(data->east_texture);
-    if (data->west_texture)
-        free(data->west_texture);
-    // add free for map
+	if (data->north_texture)
+		free(data->north_texture);
+	if (data->south_texture)
+		free(data->south_texture);
+	if (data->east_texture)
+		free(data->east_texture);
+	if (data->west_texture)
+		free(data->west_texture);
+	// add free for map
 }
 
 int	is_valid_char(char *str)
@@ -95,8 +95,8 @@ int	find_player(t_data *data)
 		y++;
 	}
 	if (player_count != 1)
-    	return (0);
-	return (1); 
+		return (0);
+	return (1);
 }
 
 int	check_chars(t_data *data)
@@ -117,14 +117,14 @@ int	check_chars(t_data *data)
 int	check_neighbors(t_data *data, int y, int x)
 {
 	if (y - 1 < 0 || data->map[y - 1][x] == ' ')
-        return (0);
-    if (y + 1 >= data->map_height || data->map[y + 1][x] == ' ')
-        return (0);
-    if (x - 1 < 0 || data->map[y][x - 1] == ' ')
-        return (0);
-    if (x + 1 >= data->map_width || data->map[y][x + 1] == ' ')
-        return (0);
-    return (1);
+		return (0);
+	if (y + 1 >= data->map_height || data->map[y + 1][x] == ' ')
+		return (0);
+	if (x - 1 < 0 || data->map[y][x - 1] == ' ')
+		return (0);
+	if (x + 1 >= data->map_width || data->map[y][x + 1] == ' ')
+		return (0);
+	return (1);
 }
 int	pars_map_validation(t_data *data)
 {
@@ -161,6 +161,11 @@ int main (int ac, char **av)
 		ft_pustr_fd("Invalid file\n", 2);
 	else if (!pars_map_validation(&game.data))
 		ft_pustr_fd("Invalid map please fix it", 2);
+	else if (!init_game(&game))
+		return (0);
+	mlx_loop_hook(game.mlx_ptr, render, &game);
+	mlx_loop(game.mlx_ptr);
+
 	// printf("color : %d\n", game.data.floor_color);
 	// printf("color2 : %d\n", game.data.ceiling_color);
 	// free_data(&game.data);
