@@ -137,7 +137,10 @@ int	pars_map_validation(t_data *data)
 
 	y = 0;
 	if(!check_chars(data))
+	{
+		printf("DEBUG: The error is coming from check_chars()!\n");
 		return (0);
+	}
 	while (data->map[y])
 	{
 		x = 0;
@@ -145,7 +148,10 @@ int	pars_map_validation(t_data *data)
 		{
 			if(ft_strchr1("0NSEW", data->map[y][x]))
 				if(!check_neighbors(data, y, x))
+				{
+					printf("DEBUG: The error is from check_neighbors() at [%d][%d]!\n", y, x);
 					return (0);
+				}
 			x++;
 		}
 		y++;
@@ -165,10 +171,10 @@ int main (int ac, char **av)
 		ft_pustr_fd("Invalid file\n", 2);
 	else if (!pars_map_validation(&game.data))
 		ft_pustr_fd("Invalid map please fix it", 2);
-	else if (!init_game(&game))
-		return (0);
-	mlx_loop_hook(game.mlx_ptr, render, &game);
-	mlx_loop(game.mlx_ptr);
+	// else if (!init_game(&game))
+	// 	return (0);
+	// mlx_loop_hook(game.mlx_ptr, render, &game);
+	// mlx_loop(game.mlx_ptr);
 
 	// printf("color : %d\n", game.data.floor_color);
 	// printf("color2 : %d\n", game.data.ceiling_color);

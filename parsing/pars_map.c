@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:50:22 by allali            #+#    #+#             */
-/*   Updated: 2025/09/22 14:31:54 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:10:03 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,23 +133,26 @@ int pars_color(char *line, int *color_ptr, int *flag)
 }
 int	pars_conf(char *line, t_data *data, t_list **head)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		return(pars_texture(line + 3, &data->north_texture, &data->flags.no));
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		return(pars_texture(line + 3, &data->south_texture, &data->flags.so));
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		return(pars_texture(line + 3, &data->east_texture, &data->flags.east));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		return(pars_texture(line + 3, &data->west_texture, &data->flags.we));
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		return (pars_color(line + 2, &data->floor_color, &data->flags.floor));
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (pars_color(line + 2, &data->ceiling_color, &data->flags.cealing));
-	else if (ft_strncmp(line, "0", 1) == 0 || ft_strncmp(line, "1", 1) == 0)
+	char	*trimed;
+
+	trimed = ft_strtrim(line, " \t");
+	if (ft_strncmp(trimed, "NO ", 3) == 0)
+		return(pars_texture(trimed + 3, &data->north_texture, &data->flags.no));
+	else if (ft_strncmp(trimed, "SO ", 3) == 0)
+		return(pars_texture(trimed + 3, &data->south_texture, &data->flags.so));
+	else if (ft_strncmp(trimed, "EA ", 3) == 0)
+		return(pars_texture(trimed + 3, &data->east_texture, &data->flags.east));
+	else if (ft_strncmp(trimed, "WE ", 3) == 0)
+		return(pars_texture(trimed + 3, &data->west_texture, &data->flags.we));
+	else if (ft_strncmp(trimed, "F ", 2) == 0)
+		return (pars_color(trimed + 2, &data->floor_color, &data->flags.floor));
+	else if (ft_strncmp(trimed, "C ", 2) == 0)
+		return (pars_color(trimed + 2, &data->ceiling_color, &data->flags.cealing));
+	else if (ft_strchr1(line, '0') || ft_strchr1(line, '1'))
 		return (pars_map(line, head));
 	else
 	{
-		if(line[0] == '\n')
+		if(trimed[0] == '\n')
 			return (1);
 		return (0);
 	}
@@ -168,8 +171,8 @@ int read_file(t_game *game, char *file, t_list **head)
 		if(!line)
 			break;
 		ptr = line;
-		while (*ptr == ' ' || *ptr == '\t')
-			ptr++;
+		// while (*ptr == ' ' || *ptr == '\t')
+		// 	ptr++;
 		if (*line == '\n' || *line == '\0')
 		{
 			free(line);
@@ -270,6 +273,6 @@ int	start_parsing(t_game *game, char *file)
 	game->data.map = malloc(sizeof(char *) * (game->data.map_height + 1));
 	populate_arr(head, game);
 	ft_lstclear(&head, free);
-	// debug_print_data(&game->data);
+	debug_print_data(&game->data);
 	return 1;
 }
