@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:50:22 by allali            #+#    #+#             */
-/*   Updated: 2025/09/20 17:34:59 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:31:54 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int pars_color(char *line, int *color_ptr, int *flag)
 {
 	char	**splited;
 	int		i;
-
 	i = 0;
 	while (line[i])
 	{
@@ -128,7 +127,7 @@ int pars_color(char *line, int *color_ptr, int *flag)
 		ft_free_split(splited);
 		return 0;
 	}
-	ft_free_split(splited); 
+	ft_free_split(splited);
 	*flag = 1;
 	return 1;
 }
@@ -225,8 +224,8 @@ void    debug_print_data(t_data *data)
 int	check_sum(t_game *game, t_list **head)
 {
 	int flag_sum;
-	flag_sum = game->data.flags.no + game->data.flags.so + 
-               game->data.flags.we + game->data.flags.east + 
+	flag_sum = game->data.flags.no + game->data.flags.so +
+               game->data.flags.we + game->data.flags.east +
                game->data.flags.floor + game->data.flags.cealing;
     if (flag_sum != 6)
     {

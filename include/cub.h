@@ -19,7 +19,17 @@
 # include <stdlib.h>
 #include <limits.h>
 // # include <mlx.h>
+#include "../minilibx-linux/mlx.h"
 #  define BUFFER_SIZE 1024
+
+typedef struct s_img
+{
+    void    *img;
+    char    *addr;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}   t_img;
 
 typedef struct s_flag
 {
@@ -53,6 +63,7 @@ typedef struct s_game
     void    *mlx_ptr;
     void    *win_ptr;
     t_data  data;
+    t_img   frame;
 }   t_game;
 
 typedef struct s_list
@@ -86,4 +97,6 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	**ft_split(const char *s, char c);
 int		ft_lstsize(t_list *lst);
+int	init_game(t_game *game);
+int	render(t_game *game);
 #endif
