@@ -18,8 +18,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 #include <limits.h>
-// # include <mlx.h>
-// #include "../minilibx-linux/mlx.h"
+# include <mlx.h>
+#include "../minilibx-linux/mlx.h"
 #  define BUFFER_SIZE 1024
 
 typedef struct s_img

@@ -168,16 +168,27 @@ int main (int ac, char **av)
 	else if (!check_ext(av[1]))
 		ft_pustr_fd("Invalid file extension. Use .cub\n", 2);
 	else if (!start_parsing(&game, av[1]))
+    {
 		ft_pustr_fd("Invalid file\n", 2);
+        exit(1);
+    }
 	else if (!pars_map_validation(&game.data))
+    {
 		ft_pustr_fd("Invalid map please fix it", 2);
-	// else if (!init_game(&game))
-	// 	return (0);
-	// mlx_loop_hook(game.mlx_ptr, render, &game);
-	// mlx_loop(game.mlx_ptr);
+        exit(1);
+    }
+	else if (!init_game(&game))
+    {
+        ft_pustr_fd("Erreur in init", 2);
+        exit(1);
+    }
+    printf("dfghjj\n");
+
+	mlx_loop_hook(game.mlx_ptr, render, &game);
+	mlx_loop(game.mlx_ptr);
 
 	// printf("color : %d\n", game.data.floor_color);
 	// printf("color2 : %d\n", game.data.ceiling_color);
-	// free_data(&game.data);
+	free_data(&game.data);
 	free_game_data(&game.data);
 }
