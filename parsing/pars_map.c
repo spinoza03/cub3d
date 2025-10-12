@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:50:22 by allali            #+#    #+#             */
-/*   Updated: 2025/09/23 12:37:27 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/23 16:24:04 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,6 @@ int	start_parsing(t_game *game, char *file)
 	game->data.map = malloc(sizeof(char *) * (game->data.map_height + 1));
 	populate_arr(head, game);
 	ft_lstclear(&head, free);
-	debug_print_data(&game->data);
+	// debug_print_data(&game->data);
 	return 1;
 }

@@ -177,15 +177,15 @@ int main (int ac, char **av)
 		ft_pustr_fd("Invalid map please fix it", 2);
         exit(1);
     }
-	else if (!init_game(&game))
-    {
-        ft_pustr_fd("Erreur in init", 2);
-        exit(1);
-    }
-    printf("dfghjj\n");
+	// else if (!init_game(&game))
+    // {
+    //     ft_pustr_fd("Erreur in init", 2);
+    //     exit(1);
+    // }
+    // printf("dfghjj\n");
 
-	mlx_loop_hook(game.mlx_ptr, render, &game);
-	mlx_loop(game.mlx_ptr);
+	// mlx_loop_hook(game.mlx_ptr, render, &game);
+	// mlx_loop(game.mlx_ptr);
 
 	// printf("color : %d\n", game.data.floor_color);
 	// printf("color2 : %d\n", game.data.ceiling_color);

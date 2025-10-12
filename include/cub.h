@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:56 by allali            #+#    #+#             */
-/*   Updated: 2025/09/22 14:33:43 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/09/23 16:20:51 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 #include <limits.h>
-# include <mlx.h>
-#include "../minilibx-linux/mlx.h"
+// # include <mlx.h>
+// #include "../minilibx-linux/mlx.h"
 #  define BUFFER_SIZE 1024
 
 typedef struct s_img
