@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "../../include/cub.h"
 
 void rotate_player(t_game *game, double angle)
 {

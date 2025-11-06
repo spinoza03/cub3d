@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "../../include/cub.h"
 
 void clear_screen(t_game *game, int color)
 {
