@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:56 by allali            #+#    #+#             */
-/*   Updated: 2025/11/06 19:48:35 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/07 17:13:02 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,11 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void	init_data(t_game *game);
+int	check_sum(t_game *game, t_list **head);
+int	check_count(char **colors, int *final_color);
+int	is_valid_integer(char *str);
+void	ft_free_split(char **arr);
 void	free_all_data(t_game *game);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 int		ft_atoi(const char *str);
@@ -149,6 +154,10 @@ void rotate_player(t_game *game, double angle);
 void move_player(t_game *game, double dx, double dy);
 int    render_3d(t_game *game);
 int	ft_abs(int n);
-void    ft_free_split(char **arr);
 int		load_textures(t_game *game);
+int	pars_map(char *line, t_list **head);
+int	pars_texture(char *line, char **texture_ptr, int *flag);
+int	pars_color(char *line, int *color_ptr, int *flag);
+int	pars_conf(char *line, t_game *game, t_list **head);
+int	pars_map_validation(t_game *game);
 #endif

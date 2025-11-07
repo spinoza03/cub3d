@@ -8,7 +8,8 @@ NAME = cub3d
 SRC_PARS = main.c utils/functions.c utils/functions2.c utils/functions3.c \
       gitnext/get_utils.c gitnext/get_lines.c parsing/pars_map.c \
       utils/functions1.c utils/functions4.c utils/ft_strtrim.c \
-	  parsing/loading_textures.c
+	  parsing/loading_textures.c validation.c init.c parsing/start_pars.c \
+	  parsing/utils.c
 
 SRC_RECAST = recast_badr/recast/iniit.c \
              recast_badr/recast/init_player.c \
