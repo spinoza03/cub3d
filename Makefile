@@ -11,11 +11,13 @@ SRC_PARS = main.c utils/functions.c utils/functions2.c utils/functions3.c \
 	  parsing/loading_textures.c validation.c init.c parsing/start_pars.c \
 	  parsing/utils.c
 
-SRC_RECAST = recast_badr/recast/iniit.c \
+SRC_RECAST = recast_badr/recast/init_win.c \
              recast_badr/recast/init_player.c \
-             recast_badr/recast/clear_screen.c \
-             recast_badr/recast/rotate_player.c \
              recast_badr/recast/render_3d.c \
+			 recast_badr/recast/handle_key.c\
+			 recast_badr/recast/draw_player.c\
+			 recast_badr/recast/render_3d_utils.c \
+			 recast_badr/recast/render_3d_draw.c \
 
 SRC = ${SRC_PARS} ${SRC_RECAST}
 
