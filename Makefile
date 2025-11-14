@@ -23,7 +23,7 @@ SRC = ${SRC_PARS} ${SRC_RECAST}
 
 OBJ = ${SRC:.c=.o}
 HEADER = include/cub.h
-
+ 
 all: ${NAME}
 
 ${NAME}: ${OBJ}
