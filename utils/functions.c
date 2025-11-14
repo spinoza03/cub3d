@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:07:36 by allali            #+#    #+#             */
-/*   Updated: 2025/09/10 16:50:02 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:53:03 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
-void ft_pustr_fd(char *str, int fd)
+
+void	ft_pustr_fd(char *str, int fd)
 {
 	write(fd, str, ft_strlen(str));
 }

@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:20:45 by ilallali          #+#    #+#             */
-/*   Updated: 2025/09/17 18:51:48 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:54:45 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_atoi(const char *str)
 
 	sign = 1;
 	result = 0;
-	if(*str == '\n')
+	if (*str == '\n')
 		return (-1);
 	while (is_space(*str))
 		str++;
@@ -39,11 +39,12 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (*str - '0');
 		if ((sign == 1 && result > INT_MAX)
 			|| (sign == -1 && - result < INT_MIN))
-			return(-1);
+			return (-1);
 		str++;
 	}
 	return (sign * result);
 }
+
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (!lst || !del)

@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:54:33 by ilallali          #+#    #+#             */
-/*   Updated: 2025/09/12 17:26:28 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:53:26 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
+
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t			i;
@@ -50,7 +51,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 size_t	ft_strlen(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

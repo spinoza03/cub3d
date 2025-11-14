@@ -1,24 +1,23 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allali <allali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:36 by allali            #+#    #+#             */
-/*   Updated: 2025/09/04 21:00:42 by allali           ###   ########.fr       */
+/*   Updated: 2025/11/14 15:25:56 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub.h"
 
-int check_ext(char *str)
+int	check_ext(char *str)
 {
 	char	*dot;
 
 	dot = ft_strrchr(str, '.');
-	if (dot == NULL || (ft_strcmp(dot, ".cub") != 0|| *(dot - 1) == '.'))
+	if (dot == NULL || (ft_strcmp(dot, ".cub") != 0 || *(dot - 1) == '.'))
 		return (0);
 	else
 		return (1);

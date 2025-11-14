@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:09:57 by ilallali          #+#    #+#             */
-/*   Updated: 2025/11/08 17:55:57 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:52:23 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_data(t_game *game)
 	game->flags.floor = 0;
 	game->flags.cealing = 0;
 }
+
 static void	free_parsing_data(t_game *game)
 {
 	if (game->north_texture)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 21:01:58 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/12 21:02:04 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:28:05 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void			populate_arr(t_list *head, t_game *game);
 void			init_data(t_game *game);
 int				check_sum(t_game *game, t_list **head);
 int				check_count(char **colors, int *final_color);

@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 16:58:27 by ilallali          #+#    #+#             */
-/*   Updated: 2025/11/07 18:06:51 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:52:05 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	check_chars(t_game *game)
 		return (0);
 	return (1);
 }
+
 int	check_neighbors(t_game *game, int y, int x)
 {
 	if (y == 0)
@@ -110,10 +111,7 @@ int	pars_map_validation(t_game *game)
 		{
 			if (ft_strchr1("0NSEW", game->map[y][x]))
 				if (!check_neighbors(game, y, x))
-				{
-					printf("DEBUG: The error from check_neighbors() at [%d][%d]!\n", y, x);
 					return (0);
-				}
 			x++;
 		}
 		y++;

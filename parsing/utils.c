@@ -6,7 +6,7 @@
 /*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 16:45:09 by ilallali          #+#    #+#             */
-/*   Updated: 2025/11/07 16:47:48 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:58:17 by ilallali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	is_valid_integer(char *str)
 	}
 	return (1);
 }
+
 int	check_count(char **colors, int *final_color)
 {
 	int	i;
@@ -70,9 +71,9 @@ int	check_sum(t_game *game, t_list **head)
 {
 	int	flag_sum;
 
-	flag_sum = game->flags.no + game->flags.so +
-				game->flags.we + game->flags.east +
-				game->flags.floor + game->flags.cealing;
+	flag_sum = game->flags.no + game->flags.so
+		+ game->flags.we + game->flags.east
+		+ game->flags.floor + game->flags.cealing;
 	if (flag_sum != 6)
 	{
 		ft_pustr_fd("Error: Missing one or more configurations.\n", 2);
