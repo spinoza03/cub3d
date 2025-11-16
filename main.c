@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:36 by allali            #+#    #+#             */
-/*   Updated: 2025/11/14 15:25:56 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/16 17:37:55 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ static int	initialize_and_run(t_game *game)
 		ft_pustr_fd("Error: Failed to load textures\n", 2);
 		return (0);
 	}
+    mlx_hook(game->win_ptr, 2, 0, key_press, game);
+    mlx_hook(game->win_ptr, 3, 0, key_release, game);
 	mlx_loop_hook(game->mlx_ptr, render_3d, game);
-	mlx_hook(game->win_ptr, 2, 1L << 0, handle_key, game);
 	mlx_loop(game->mlx_ptr);
 	return (1);
 }

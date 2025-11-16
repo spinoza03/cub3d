@@ -6,7 +6,7 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:55:11 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/09 10:55:28 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:34:06 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	init_player(t_game *game)
 		+ (game->img.cell_size / 2.0);
 	game->player.ply_y = (game->player_y * game->img.cell_size)
 		+ (game->img.cell_size / 2.0);
-	game->player.move_speed = 0.1;
-	game->player.rot_speed = 0.05;
+	game->player.move_speed = 0.09;
+	game->player.rot_speed = 0.04;
 	game->player.player_dir = game->player_dir_char;
 	set_dir_ns(game);
 	set_dir_ew(game);

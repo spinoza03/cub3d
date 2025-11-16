@@ -6,12 +6,24 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:54:18 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/09 10:59:22 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:34:59 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
+int    key_press(int keycode, t_game *game)
+{
+    if (keycode < COUNT)
+        game->key[keycode] = 1;
+    return (0);
+}
 
+int    key_release(int keycode, t_game *game)
+{
+    if (keycode < COUNT)
+        game->key[keycode] = 0;
+    return (0);
+}
 void	rotate_player(t_game *game, double angle)
 {
 	double	old_dir_x;
@@ -61,28 +73,28 @@ void	move_player(t_game *game, double dx, double dy)
 		game->player.ply_y = new_y;
 }
 
-int	handle_key(int keycode, t_game *game)
+int	handle_key(t_game *game)
 {
 	double	move;
 
 	move = game->player.move_speed * game->img.cell_size;
-	if (keycode == 65307)
+	if (game->key[KEY_ESC])
 		exit(0);
-	if (keycode == 'w')
+	if (game->key[KEY_W])
 		move_player(game, game->player.player_dir_x * move,
 			game->player.player_dir_y * move);
-	else if (keycode == 's')
+	if (game->key[KEY_S])
 		move_player(game, -game->player.player_dir_x * move,
 			-game->player.player_dir_y * move);
-	else if (keycode == 'a')
+	if (game->key[KEY_A])
 		move_player(game, -game->player.plane_x * move,
 			-game->player.plane_y * move);
-	else if (keycode == 'd')
+	if (game->key[KEY_D])
 		move_player(game, game->player.plane_x * move,
 			game->player.plane_y * move);
-	else if (keycode == 65361)
+	if (game->key[KEY_LEFT])
 		rotate_player(game, -game->player.rot_speed);
-	else if (keycode == 65363)
+	if (game->key[KEY_RIGHT])
 		rotate_player(game, game->player.rot_speed);
 	return (0);
 }

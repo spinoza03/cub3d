@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:09:57 by ilallali          #+#    #+#             */
-/*   Updated: 2025/11/14 14:52:23 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:27:12 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub.h"
-
 void	init_data(t_game *game)
 {
+    int i;
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	game->img.img_ptr = NULL;
@@ -34,6 +34,10 @@ void	init_data(t_game *game)
 	game->flags.east = 0;
 	game->flags.floor = 0;
 	game->flags.cealing = 0;
+    i = 0;
+    while (i < COUNT)
+        game->key[i++] = 0;
+
 }
 
 static void	free_parsing_data(t_game *game)
@@ -70,7 +74,7 @@ static void	free_mlx_core(t_game *game)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->mlx_ptr)
 	{
-		mlx_destroy_display(game->mlx_ptr);
+		// mlx_destroy_display(game->mlx_ptr);
 		free(game->mlx_ptr);
 	}
 }

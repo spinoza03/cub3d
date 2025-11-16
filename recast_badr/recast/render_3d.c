@@ -6,7 +6,7 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:45:54 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/12 21:13:56 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:18:05 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	render_3d(t_game *game)
 {
 	int		x;
 	double	pos[2];
-
+    handle_key(game);
 	pos[0] = game->player.ply_x / game->img.cell_size;
 	pos[1] = game->player.ply_y / game->img.cell_size;
 	x = 0;

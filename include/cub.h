@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 21:01:58 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/14 15:28:05 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:31:02 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,23 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <math.h>
-# include "../minilibx-linux/mlx.h"
+#include <mlx.h>
 
 # define BUFFER_SIZE 1024
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define COUNT 125
+
+// KEYCODE FOR MACOS
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_ESC 53
 
 typedef struct s_img
 {
@@ -109,6 +119,7 @@ typedef struct s_game
 	int			map_height;
 	int			map_width;
 	t_flag		flags;
+    int         key[COUNT];
 }	t_game;
 
 typedef struct s_list
@@ -153,7 +164,7 @@ void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int				init_win(t_game *game);
 void			init_var(t_game *game);
 void			init_player(t_game *game);
-int				handle_key(int keycode, t_game *game);
+int				handle_key(t_game *game);
 void			draw_player(t_game *game);
 void			rotate_player(t_game *game, double angle);
 void			move_player(t_game *game, double dx, double dy);
@@ -169,5 +180,7 @@ void			calc_step_and_dda(t_game *game, double *pos, double *side_d);
 void			calc_wall_params(t_game *game, double *side_d, int *draw);
 void			render_column(t_game *game, int x, double *pos, int *draw);
 unsigned int	get_texture_pixel(t_img *tex, int x, int y);
+int    key_press(int keycode, t_game *game);
+int    key_release(int keycode, t_game *game);
 
 #endif

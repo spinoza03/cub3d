@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilallali <ilallali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 16:58:27 by ilallali          #+#    #+#             */
-/*   Updated: 2025/11/14 14:52:05 by ilallali         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:30:21 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	is_valid_char(char *str)
 	{
 		if (!ft_strchr1(valid_map_chars, str[i]))
 		{
-			printf(", here the problem-->[%c]", str[i]);
 			return (0);
 		}
 		i++;
@@ -101,7 +100,6 @@ int	pars_map_validation(t_game *game)
 	y = 0;
 	if (!check_chars(game))
 	{
-		printf("DEBUG: The error is coming from check_chars()!\n");
 		return (0);
 	}
 	while (game->map[y])
