@@ -6,7 +6,7 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:36 by allali            #+#    #+#             */
-/*   Updated: 2025/11/16 17:37:55 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/11/30 14:10:08 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	parsing_checks(t_game *game, int ac, char **av)
 	}
 	return (1);
 }
-
 static int	initialize_and_run(t_game *game)
 {
 	init_player(game);

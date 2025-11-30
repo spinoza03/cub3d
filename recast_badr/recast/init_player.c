@@ -6,7 +6,7 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:55:11 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/16 18:34:06 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:30:16 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ static void	set_dir_ns(t_game *game)
 {
 	if (game->player.player_dir == 'N')
 	{
-		game->player.player_dir_x = 0.0;
-		game->player.player_dir_y = -1.0;
+		game->player.player_dir_x = 0;
+		game->player.player_dir_y = -1;
 		game->player.plane_x = 0.66;
-		game->player.plane_y = 0.0;
+		game->player.plane_y = 0;
 	}
 	else if (game->player.player_dir == 'S')
 	{
-		game->player.player_dir_x = 0.0;
-		game->player.player_dir_y = 1.0;
+		game->player.player_dir_x = 0;
+		game->player.player_dir_y = 1;
 		game->player.plane_x = -0.66;
-		game->player.plane_y = 0.0;
+		game->player.plane_y = 0;
 	}
 }
 
@@ -41,16 +41,16 @@ static void	set_dir_ew(t_game *game)
 {
 	if (game->player.player_dir == 'E')
 	{
-		game->player.player_dir_x = 1.0;
-		game->player.player_dir_y = 0.0;
-		game->player.plane_x = 0.0;
+		game->player.player_dir_x = 1;
+		game->player.player_dir_y = 0;
+		game->player.plane_x = 0;
 		game->player.plane_y = 0.66;
 	}
 	else if (game->player.player_dir == 'W')
 	{
-		game->player.player_dir_x = -1.0;
-		game->player.player_dir_y = 0.0;
-		game->player.plane_x = 0.0;
+		game->player.player_dir_x = -1;
+		game->player.player_dir_y = 0;
+		game->player.plane_x = 0;
 		game->player.plane_y = -0.66;
 	}
 }
@@ -68,3 +68,4 @@ void	init_player(t_game *game)
 	set_dir_ns(game);
 	set_dir_ew(game);
 }
+

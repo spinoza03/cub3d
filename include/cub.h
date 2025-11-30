@@ -6,7 +6,7 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 21:01:58 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/16 18:31:02 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:58:59 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_camera
 	int		side;
 	double	delta_dist_x;
 	double	delta_dist_y;
+    double   side_dst_x;
+    double	 side_dst_y;
+
 }	t_camera;
 
 typedef struct s_plr

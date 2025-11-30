@@ -6,7 +6,7 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 20:46:45 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/12 21:13:52 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:20:39 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,20 @@ void	calc_step_and_dda(t_game *game, double *pos, double *side_dist)
 
 void	calc_wall_params(t_game *game, double *side_dist, int *draw)
 {
-	double	perp_wall_dist;
+	double	distance;
+    double fix_fisheye;
 	int		line_height;
+    double lenght_vec;
 
 	if (game->camera.side == 0)
-		perp_wall_dist = (side_dist[0] - game->camera.delta_dist_x);
-	else
-		perp_wall_dist = (side_dist[1] - game->camera.delta_dist_y);
-	if (perp_wall_dist < 0.0001)
-		perp_wall_dist = 0.0001;
-	line_height = (int)(game->height / perp_wall_dist);
+        distance = (side_dist[0] - game->camera.delta_dist_x);
+    else
+        distance = (side_dist[1] - game->camera.delta_dist_y);
+
+    lenght_vec = sqrt(game->camera.raydirx * game->camera.raydirx + \
+        game->camera.raydiry * game->camera.raydiry);
+    fix_fisheye = distance / lenght_vec;
+	line_height = (int)(game->height / fix_fisheye);
 	draw[0] = -line_height / 2 + game->height / 2;
 	if (draw[0] < 0)
 		draw[0] = 0;
@@ -94,5 +98,5 @@ void	calc_wall_params(t_game *game, double *side_dist, int *draw)
 	if (draw[1] >= game->height)
 		draw[1] = game->height - 1;
 	draw[2] = line_height;
-	draw[3] = (int)(perp_wall_dist * 1000);
+	draw[3] = (int)(fix_fisheye * 1000);
 }
