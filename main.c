@@ -6,7 +6,7 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 20:10:36 by allali            #+#    #+#             */
-/*   Updated: 2025/11/30 14:10:08 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/12/07 15:48:55 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	parsing_checks(t_game *game, int ac, char **av)
 	}
 	return (1);
 }
+
 static int	initialize_and_run(t_game *game)
 {
 	init_player(game);
@@ -60,8 +61,9 @@ static int	initialize_and_run(t_game *game)
 		ft_pustr_fd("Error: Failed to load textures\n", 2);
 		return (0);
 	}
-    mlx_hook(game->win_ptr, 2, 0, key_press, game);
-    mlx_hook(game->win_ptr, 3, 0, key_release, game);
+	mlx_hook(game->win_ptr, 2, 0, key_press, game);
+	mlx_hook(game->win_ptr, 3, 0, key_release, game);
+	mlx_hook(game->win_ptr, 17, 0, close_window, game);
 	mlx_loop_hook(game->mlx_ptr, render_3d, game);
 	mlx_loop(game->mlx_ptr);
 	return (1);

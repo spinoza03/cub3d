@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 21:01:58 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/27 19:58:59 by bael-bad         ###   ########.fr       */
+/*   Created: 2025/12/07 16:57:14 by bael-bad          #+#    #+#             */
+/*   Updated: 2025/12/07 17:09:20 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <math.h>
-#include <mlx.h>
+# include <mlx.h>
 
 # define BUFFER_SIZE 1024
 # define WIN_WIDTH 800
@@ -28,7 +28,6 @@
 # define TEX_HEIGHT 64
 # define COUNT 125
 
-// KEYCODE FOR MACOS
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
@@ -68,9 +67,8 @@ typedef struct s_camera
 	int		side;
 	double	delta_dist_x;
 	double	delta_dist_y;
-    double   side_dst_x;
-    double	 side_dst_y;
-
+	double	side_dist_x;
+	double	side_dist_y;
 }	t_camera;
 
 typedef struct s_plr
@@ -122,7 +120,7 @@ typedef struct s_game
 	int			map_height;
 	int			map_width;
 	t_flag		flags;
-    int         key[COUNT];
+	int			key[COUNT];
 }	t_game;
 
 typedef struct s_list
@@ -131,18 +129,54 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-void			populate_arr(t_list *head, t_game *game);
+/* ------------------ Init & Free ------------------ */
 void			init_data(t_game *game);
+void			free_all_data(t_game *game);
+void			free_parsing_data(t_game *game);
+void			free_mlx_images(t_game *game);
+void			free_mlx_core(t_game *game);
+int				init_game(t_game *game);
+int				init_win(t_game *game);
+void			init_var(t_game *game);
+void			init_player(t_game *game);
+
+/* ------------------ Movement ------------------ */
+int				handle_key(t_game *game);
+void			rotate_player(t_game *game, double angle);
+void			move_player(t_game *game, double dx, double dy);
+int				key_press(int keycode, t_game *game);
+int				key_release(int keycode, t_game *game);
+int				close_window(t_game *game);
+
+/* ------------------ Render & Graphics ------------------ */
+int				render(t_game *game);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			draw_player(t_game *game);
+int				render_3d(t_game *game);
+int				load_textures(t_game *game);
+void			calc_step_and_dda(t_game *game, double *pos, double *side_d);
+void			calc_wall_params(t_game *game, double *side_d, int *draw);
+void			render_column(t_game *game, int x, double *pos, int *draw);
+unsigned int	get_texture_pixel(t_img *tex, int x, int y);
+
+/* ------------------ Parsing & Validation ------------------ */
+int				start_parsing(t_game *game, char *file);
 int				check_sum(t_game *game, t_list **head);
 int				check_count(char **colors, int *final_color);
 int				is_valid_integer(char *str);
+int				pars_map(char *line, t_list **head);
+int				pars_texture(char *line, char **texture_ptr, int *flag);
+int				pars_color(char *line, int *color_ptr, int *flag);
+int				pars_conf(char *line, t_game *game, t_list **head);
+int				pars_map_validation(t_game *game);
+void			populate_arr(t_list *head, t_game *game);
+
+/* ------------------ Libft ------------------ */
 void			ft_free_split(char **arr);
-void			free_all_data(t_game *game);
 void			ft_lstclear(t_list **lst, void (*del)(void *));
 int				ft_atoi(const char *str);
 char			*ft_strdup(const char *s);
 char			*ft_strtrim(const char *s1, const char *set);
-int				start_parsing(t_game *game, char *file);
 int				ft_strcmp(char *s1, char *s2);
 char			*ft_strrchr(const char *str, int c);
 size_t			ft_strlen(const char *s);
@@ -161,29 +195,5 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 char			**ft_split(const char *s, char c);
 int				ft_lstsize(t_list *lst);
-int				init_game(t_game *game);
-int				render(t_game *game);
-void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-int				init_win(t_game *game);
-void			init_var(t_game *game);
-void			init_player(t_game *game);
-int				handle_key(t_game *game);
-void			draw_player(t_game *game);
-void			rotate_player(t_game *game, double angle);
-void			move_player(t_game *game, double dx, double dy);
-int				render_3d(t_game *game);
-int				ft_abs(int n);
-int				load_textures(t_game *game);
-int				pars_map(char *line, t_list **head);
-int				pars_texture(char *line, char **texture_ptr, int *flag);
-int				pars_color(char *line, int *color_ptr, int *flag);
-int				pars_conf(char *line, t_game *game, t_list **head);
-int				pars_map_validation(t_game *game);
-void			calc_step_and_dda(t_game *game, double *pos, double *side_d);
-void			calc_wall_params(t_game *game, double *side_d, int *draw);
-void			render_column(t_game *game, int x, double *pos, int *draw);
-unsigned int	get_texture_pixel(t_img *tex, int x, int y);
-int    key_press(int keycode, t_game *game);
-int    key_release(int keycode, t_game *game);
 
 #endif

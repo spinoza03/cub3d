@@ -6,18 +6,11 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:55:11 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/27 17:30:16 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/12/07 16:49:26 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
-
-int	ft_abs(int n)
-{
-	if (n < 0)
-		return (-n);
-	return (n);
-}
 
 static void	set_dir_ns(t_game *game)
 {
@@ -68,4 +61,3 @@ void	init_player(t_game *game)
 	set_dir_ns(game);
 	set_dir_ew(game);
 }
-

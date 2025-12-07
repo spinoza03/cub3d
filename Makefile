@@ -19,7 +19,10 @@ SRC_RECAST = recast_badr/recast/init_win.c \
              recast_badr/recast/handle_key.c \
              recast_badr/recast/draw_player.c \
              recast_badr/recast/render_3d_utils.c \
-             recast_badr/recast/render_3d_draw.c
+             recast_badr/recast/render_3d_draw.c \
+			 recast_badr/recast/render_3d_utils1.c \
+			 recast_badr/recast/key_p_r.c \
+			 free.c \
 
 SRC = ${SRC_PARS} ${SRC_RECAST}
 

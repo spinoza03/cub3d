@@ -6,14 +6,16 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:09:57 by ilallali          #+#    #+#             */
-/*   Updated: 2025/11/16 18:27:12 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:04:18 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub.h"
+
 void	init_data(t_game *game)
 {
-    int i;
+	int	i;
+
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	game->img.img_ptr = NULL;
@@ -34,13 +36,12 @@ void	init_data(t_game *game)
 	game->flags.east = 0;
 	game->flags.floor = 0;
 	game->flags.cealing = 0;
-    i = 0;
-    while (i < COUNT)
-        game->key[i++] = 0;
-
+	i = 0;
+	while (i < COUNT)
+		game->key[i++] = 0;
 }
 
-static void	free_parsing_data(t_game *game)
+void	free_parsing_data(t_game *game)
 {
 	if (game->north_texture)
 		free(game->north_texture);
@@ -54,7 +55,7 @@ static void	free_parsing_data(t_game *game)
 		ft_free_split(game->map);
 }
 
-static void	free_mlx_images(t_game *game)
+void	free_mlx_images(t_game *game)
 {
 	if (game->img.img_ptr && game->mlx_ptr)
 		mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);
@@ -68,20 +69,10 @@ static void	free_mlx_images(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->tex_west.img_ptr);
 }
 
-static void	free_mlx_core(t_game *game)
+void	free_mlx_core(t_game *game)
 {
 	if (game->win_ptr && game->mlx_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->mlx_ptr)
-	{
-		// mlx_destroy_display(game->mlx_ptr);
 		free(game->mlx_ptr);
-	}
-}
-
-void	free_all_data(t_game *game)
-{
-	free_parsing_data(game);
-	free_mlx_images(game);
-	free_mlx_core(game);
 }

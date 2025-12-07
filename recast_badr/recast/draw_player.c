@@ -6,7 +6,7 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:59:45 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/12 20:58:46 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/12/07 16:48:45 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ static void	draw_player_dir(t_game *game, int px, int py)
 	line_end[1] = py + (int)(game->player.player_dir_y * 20);
 	d[0] = line_end[0] - px;
 	d[1] = line_end[1] - py;
-	steps = ft_abs(d[0]);
-	if (ft_abs(d[1]) > steps)
-		steps = ft_abs(d[1]);
+	steps = abs(d[0]);
+	if (abs(d[1]) > steps)
+		steps = abs(d[1]);
 	pos[0] = px;
 	pos[1] = py;
 	if (steps > 0)

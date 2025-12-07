@@ -6,22 +6,12 @@
 /*   By: bael-bad <bael-bad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:54:18 by bael-bad          #+#    #+#             */
-/*   Updated: 2025/11/27 17:44:56 by bael-bad         ###   ########.fr       */
+/*   Updated: 2025/12/07 16:47:03 by bael-bad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
-int    key_press(int keycode, t_game *game)
-{
-        game->key[keycode] = 1;
-    return (0);
-}
 
-int    key_release(int keycode, t_game *game)
-{
-        game->key[keycode] = 0;
-    return (0);
-}
 void	rotate_player(t_game *game, double angle)
 {
 	double	old_dir_x;
